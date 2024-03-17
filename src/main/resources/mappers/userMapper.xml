@@ -11,20 +11,6 @@
         WHERE id = #{id}
     </select>
 
-    <insert id="insertUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
-        INSERT INTO user (userId, passWord, nickName, isWithDraw, status, isAdmin)
-        VALUES (#{userId}, #{password}, #{nickName}, #{isWithDraw}, #{status}, #{isAdmin})
-    </insert>
-
-    <update id="updateUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
-        UPDATE user
-        SET password=#{password},
-            nickName=#{nickName},
-            isWithDraw=#{isWithDraw},
-            status=#{status}
-        WHERE id = #{id}
-    </update>
-
     <delete id="deleteUserProfile">
         DELETE
         FROM user
