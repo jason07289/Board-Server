@@ -55,12 +55,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePassword(String id, String beforePassword, String afterPassword) {
-        String cryptoPassword = SHA256Util.encryptSHA256(beforePassword);
+    public void updatePassword(String id, String previousPassword, String newPassword) {
+        String cryptoPassword = SHA256Util.encryptSHA256(previousPassword);
         UserDTO memberInfo = userProfileMapper.findByIdAndPassword(id, cryptoPassword);
 
         if (memberInfo != null) {
-            memberInfo.setPassword(SHA256Util.encryptSHA256(afterPassword));
+            memberInfo.setPassword(SHA256Util.encryptSHA256(newPassword));
             int insertCount = userProfileMapper.updatePassword(memberInfo);
         } else {
             log.error("updatePasswrod ERROR! {}", memberInfo);
@@ -69,8 +69,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteId(String id, String passWord) {
-        String cryptoPassword = SHA256Util.encryptSHA256(passWord);
+    public void deleteId(String id, String password) {
+        String cryptoPassword = SHA256Util.encryptSHA256(password);
         UserDTO memberInfo = userProfileMapper.findByIdAndPassword(id, cryptoPassword);
 
         if (memberInfo != null) {
